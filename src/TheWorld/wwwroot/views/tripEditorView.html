@@ -1,0 +1,53 @@
+<div>
+    <div>
+        <a href="#/" class="btn btn-sm btn-default"> <i class="fa fa-angle-left"></i> Volver</a>
+    </div>
+    <div class="col-md-3 col-xs-4">
+        <h2>{{vm.nombre}}</h2>
+        <wait-cursor display-when="vm.isBusy"></wait-cursor>
+
+        <div class="alert alert-danger" ng-show="vm.errorMessage">{{vm.errorMessage}}</div>
+
+
+        <form novalidate name="newStopForm" ng-submit="vm.addStop()">
+            <div class="form-group">
+                <label>Fecha</label>
+                <input class="form-control" id="arrivo" name="arrivo" 
+                       ng-model="vm.newStop.arrivo" 
+                       required
+                        ng-pattern="/^(\d{2})\/(\d{2})\/(\d{4})$/"/>
+                <span class="text-danger" ng-show="newStopForm.arrivo.$error.required"></span>
+                <span class="text-danger" ng-show="newStopForm.arrivo.$error.pattern">Debe estar en formato: MM/dd/AAAA</span>
+            </div>
+            <div class="form-group">
+                <label>Lugar</label>
+                <input class="form-control" id="nombre" name="nombre" ng-model="vm.newStop.nombre" required ng-minlength="5"/>
+                <span class="text-danger" ng-show="newStopForm.nombre.$error.required">Se requiere Nombre</span>
+                <span class="text-danger" ng-show="newStopForm.nombre.$error.minlength">El Nombre debe tener al menos 5 caracteres</span>
+            </div>
+            <div>
+                <input type="submit" value="Aceptar" class="btn btn-sm btn-success" ng-disabled="newStopForm.$invalid"/>
+            </div>
+
+
+        </form>
+
+        <table class="table table-responsive table striped">
+            <tr>
+                <th>Lugar</th>
+                <th>Arrivo</th>
+            </tr>
+            <tr ng-repeat="parada in vm.paradas">
+                <td>{{parada.nombre}}</td>
+                <td>{{parada.arrivo | date:shortdate}}</td>
+            </tr>
+        </table>
+
+
+    </div>
+    <div class="col-md-9 col-xs-8">
+        <h1>Mapa</h1>
+        <div id="map"></div>
+      
+    </div>
+</div>

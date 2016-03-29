@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "Página Principal";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Por El Mundo - @ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootswatch/slate/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+
+<body>
+    <div id="sidebar">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <img src="~/img/profile_pic.jpg" alt="avatar" class="avatar" />
+            <span id="username">@User.Identity.Name</span>
+        }
+        <ul class="nav">
+            <li class="active"><a href="/">Home</a></li>
+            <li><a asp-controller="App" asp-action="About">About</a></li>
+            <li><a asp-controller="App" asp-action="Contact">Contacto</a></li>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li><a asp-controller="App" asp-action="Trips">Viajes</a></li>
+                <li><a asp-controller="Auth" asp-action="Logout">Salir</a></li>
+            }
+        </ul>
+    </div>
+    <div id="wrapper">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav navbar-left">
+                    <li>
+                        <button id="sidebarToggle" class="btn btn-lg btn-primary">
+                            <i class="fa fa-angle-left"></i>
+                        </button>
+                    </li>
+                </ul>
+                <a asp-controller="App" asp-action="Index" class="navbar-brand">Por El Mundo</a>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>
+                            <a href="https://www.instagram.com/manucho6/" class="btn btn-sm btn btn-default">
+                                <i class="fa fa-instagram"></i> Instagram
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/manu_sequeira" class="btn btn-sm btn btn-default">
+                                <i class="fa fa-twitter"></i> Twitter
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/manu.sequeira" class="btn btn-sm btn btn-default">
+                                <i class="fa fa-facebook"></i> Facebook
+                            </a>
+                        </li>
+                    }
+
+                </ul>
+            </div>
+        </nav>
+        <div id="main" class="container-fluid">
+
+            <div>
+                @RenderBody()
+            </div>
+        </div>
+        <div id="footer" class="container-fluid">
+            <div class="navbar navbar-inverse navbar-fixed-bottom">
+                <h4 class="text-center text-default"> &clubs; Sitio desarrollado by MaNu.</h4>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js">  </script>
+    <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <environment names="Development">
+        <script type="text/javascript" src="~/js/site.js">  </script>
+    </environment>
+
+    <environment names="Production,Staging">
+        <script type="text/javascript" src="~/lib/_app/site.js">  </script>
+    </environment>
+    @RenderSection("Scripts", false)
+</body>
+
+</html>

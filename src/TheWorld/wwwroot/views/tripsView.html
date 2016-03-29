@@ -1,0 +1,24 @@
+<div class="col-md-6 col-md-offset-3">
+    <div class="text-danger" ng-show="vm.erroMessage">{{vm.errorMessage}}</div>
+    <wait-cursor display-when="vm.isBusy">  </wait-cursor>
+    <table class="table table-responsive table-striped">
+        <tr ng-repeat="trip in vm.trips">
+            <td> {{trip.nombre}} </td>
+            <td>{{trip.creacion | date : 'dd-MM-yyyy'}}</td>
+            <td><a ng-href="#/editor/{{trip.nombre}}" class="btn btn-sm btn-primary">Administrar</a></td>
+        </tr>
+    </table>
+
+    <form novalidate name="newTripForm" ng-submit="vm.addTrip()">
+        <div class="form-group">
+            <label for="nombre">Nombre del Viaje</label>
+            <input class="form-control" id="nombre" type="text" name="nombre" ng-model="vm.newTrip.nombre" required ng-minlength="5" />
+            <span ng-show="newTripForm.nombre.$error.required" class="text-warning"> Se requiere Nombre del Viaje </span>
+            <span ng-show="newTripForm.nombre.$error.minlength" class="text-warning"> Se requiere un Nombre con al menos 5 caracteres </span>
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-sm btn-success" value="Agregar"
+                   ng-disabled="newTripForm.$invalid" />
+        </div>
+    </form>
+</div>

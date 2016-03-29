@@ -1,0 +1,8 @@
+{
+  "AppSettings": {
+    "SiteEmailAddress": "me@Manu.com"
+  },
+  "Data": {
+    "WorldContextConnection": "Server=MANUPC\\SQLSERVER2008;Database=TheWorldDB;Trusted_Connection=true;MultipleActiveResultSets=true;"
+  }
+}
